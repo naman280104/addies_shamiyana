@@ -1,6 +1,7 @@
 import 'package:addies_shamiyana/src/constants/image_strings.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/login/login.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/login_phone/login_phone.dart';
+import 'package:addies_shamiyana/src/features/menu/screens/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../constants/text_strings.dart';
@@ -103,7 +104,7 @@ class _MyVerifySignupState extends State<MyVerifySignup> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () {
-                      // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>()));
+                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>MainPage()));
                     },
                     child: Text(verifyPhoneno)),
               ),

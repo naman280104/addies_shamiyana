@@ -30,7 +30,7 @@ class LoginEmailForm extends StatelessWidget {
               ),
               child: TextButton(
                   onPressed: (){},
-                  child: Text(Pass,style: TextStyle(fontSize: 30))
+                  child: Text(login,style: TextStyle(fontSize: 30))
               ),
             ),
           )

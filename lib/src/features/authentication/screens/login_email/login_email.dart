@@ -16,8 +16,21 @@ class _LoginEmailState extends State<LoginEmail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: primaryWhite,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_rounded,
+            color: Colors.black,
+          ),
+        ),
+        elevation: 0,
+      ),
       body: Container(
-        padding: EdgeInsets.fromLTRB(20, 80, 20, 0),
+        padding: EdgeInsets.fromLTRB(20, 18, 20, 0),
         width: double.infinity,
         height: double.infinity,
         color: primaryWhite,

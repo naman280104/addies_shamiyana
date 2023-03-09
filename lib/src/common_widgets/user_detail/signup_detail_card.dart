@@ -43,13 +43,6 @@ class detail_card extends StatelessWidget {
                     ),
                   ),
                 ),
-                needVerify ? TextButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MyVerifySignup()));
-                    },
-                    child: Text("verify",style: TextStyle(color: Colors.black),)):Text("") ,
-
-
               ]
           ),
         ),

@@ -27,6 +27,6 @@ const verifyPhoneno="Verify Phone Number";
 const editPhone="Edit Phone Number ?";
 
 //login email
-const Pass="Pasword";
+const Pass="Password";
 const Eemail="Enter your email address";
 const ContEmail="Here, Continue with email";

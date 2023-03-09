@@ -3,7 +3,7 @@ import 'package:addies_shamiyana/src/constants/image_strings.dart';
 import 'package:addies_shamiyana/src/constants/text_strings.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/login_email/login_email.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/login_phone/login_phone.dart';
-import 'package:addies_shamiyana/src/features/authentication/screens/signup/SignUp.dart';
+import 'package:addies_shamiyana/src/features/authentication/screens/signup/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
