@@ -1,9 +1,10 @@
 import 'package:addies_shamiyana/src/constants/image_strings.dart';
+import 'package:addies_shamiyana/src/features/authentication/controllers/login_controller.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/login_phone/login_phone.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../constants/text_strings.dart';
-
+import 'package:get/get.dart';
 
 class MyVerify extends StatefulWidget {
   const MyVerify({Key? key}) : super(key: key);
@@ -13,10 +14,10 @@ class MyVerify extends StatefulWidget {
 }
 
 class _MyVerifyState extends State<MyVerify> {
-
+  var otp;
+  // final controller = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
-    var otp;
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
@@ -90,6 +91,9 @@ class _MyVerifyState extends State<MyVerify> {
               ),
               Pinput(
                 length: 6,
+                onCompleted: (value){
+                  otp=value;
+                },
                 // defaultPinTheme: defaultPinTheme,
                 // focusedPinTheme: focusedPinTheme,
                 // submittedPinTheme: submittedPinTheme,
@@ -107,6 +111,9 @@ class _MyVerifyState extends State<MyVerify> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () {
+
+                        print("otp is "+otp);
+                        LoginController.instance.verifyOTP(otp);
                       // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>()));
                     },
                     child: Text(verifyPhoneno)),

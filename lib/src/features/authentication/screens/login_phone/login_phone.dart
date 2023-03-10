@@ -1,7 +1,9 @@
 import 'package:addies_shamiyana/src/constants/image_strings.dart';
 import 'package:addies_shamiyana/src/constants/text_strings.dart';
+import 'package:addies_shamiyana/src/features/authentication/controllers/login_controller.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/login_phone/otp.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyPhone extends StatefulWidget {
   const MyPhone({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class MyPhone extends StatefulWidget {
 }
 
 class _MyPhoneState extends State<MyPhone> {
+  final controller = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,12 +60,12 @@ class _MyPhoneState extends State<MyPhone> {
                     ),
                     SizedBox(
                       width: 40,
-                      child: TextFormField(
-                        initialValue: "+91",
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                        ),
+                      child: Text("+91"
+                        // initialValue: "+91",
+                        // keyboardType: TextInputType.number,
+                        // decoration: InputDecoration(
+                        //   border: InputBorder.none,
+                        // ),
                       ),
                     ),
                     Text(
@@ -74,6 +77,7 @@ class _MyPhoneState extends State<MyPhone> {
                     ),
                     Expanded(
                         child: TextFormField(
+                          controller: controller.phoneNo,
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -94,7 +98,8 @@ class _MyPhoneState extends State<MyPhone> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () {
-                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>MyVerify()));
+                      LoginController.instance.LogInWithPhoneNoAndOTP("+91"+controller.phoneNo.text.trim());
+                      // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>MyVerify()));
                     },
                     child: Text(sendcode)),
               )

@@ -85,6 +85,7 @@ class AuthenticationRepository extends GetxController{
         Get.offAll(()=>MainPage());
       });
     }
+
     on FirebaseAuthException catch(e){
       final ex = LogInWithEmailAndPaswordFailure.code(e.code);
       print('FIREBASE AUTH EXCEPTION - ${ex.message}');

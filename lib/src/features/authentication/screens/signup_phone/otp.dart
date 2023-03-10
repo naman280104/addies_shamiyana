@@ -113,6 +113,7 @@ class _MyVerifySignupState extends State<MyVerifySignup> {
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () {
                       // OTPController.instance.verifyOTP(otp);
+                      print(otp);
                       SignUpController.instance.verifyOTP(otp,widget.user);
                       // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>MainPage()));
                     },
