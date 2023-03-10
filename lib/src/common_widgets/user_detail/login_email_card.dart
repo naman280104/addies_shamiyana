@@ -6,6 +6,7 @@ class LoginEmailCard extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.type,
+    required this.controllerfun,
     this.needverify = false,
     this.oText=false,
   });
@@ -15,6 +16,7 @@ class LoginEmailCard extends StatelessWidget {
   final bool needverify;
   final TextInputType type;
   final bool oText;
+  final TextEditingController controllerfun;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,6 +35,7 @@ class LoginEmailCard extends StatelessWidget {
                 SizedBox(width: 10),
                 Expanded(
                   child: TextFormField(
+                    controller: controllerfun,
                     style: TextStyle(fontSize: 20,),
                     keyboardType: type,
                     obscureText:oText,

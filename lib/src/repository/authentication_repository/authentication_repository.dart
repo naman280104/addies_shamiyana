@@ -1,5 +1,6 @@
 import 'package:addies_shamiyana/src/features/authentication/screens/loading/loading.dart';
 import 'package:addies_shamiyana/src/features/menu/screens/mainPage.dart';
+import 'package:addies_shamiyana/src/repository/authentication_repository/exceptions/login_email_passsword_failure.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
@@ -64,28 +65,40 @@ class AuthenticationRepository extends GetxController{
     on FirebaseAuthException catch(e){
       final ex = SignUpWithEmailAndPaswordFailure.code(e.code);
       print('FIREBASE AUTH EXCEPTION - ${ex.message}');
-      throw ex;
+      // throw ex;
     }
     catch(p){
       print("in catch code");
       print(p);
       const ex = SignUpWithEmailAndPaswordFailure();
       print('EXCEPTION - ${ex.message}');
-      throw ex;
+      // throw ex;
     }
   }
 
 
-  Future<void> loginWithEmailAndPassword(String email,String password) async {
+  Future<void> LoginWithEmailAndPassword(String email,String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      firebaseUser.value!=null ? Get.offAll(()=>MainPage()) : Get.to(()=>Loading());
+      Get.showSnackbar(GetSnackBar(message: "Login Successful",duration: Duration(seconds: 2),));
+      Future.delayed(const Duration(seconds: 2), () {
+        Get.offAll(()=>MainPage());
+      });
     }
     on FirebaseAuthException catch(e){
+      final ex = LogInWithEmailAndPaswordFailure.code(e.code);
+      print('FIREBASE AUTH EXCEPTION - ${ex.message}');
+      Get.showSnackbar(GetSnackBar(message: ex.message,duration: Duration(seconds: 2)));
 
+      // throw ex;
     }
-    catch(_){
-
+    catch(p){
+      print("in catch code");
+      print(p);
+      const ex = LogInWithEmailAndPaswordFailure();
+      Get.showSnackbar(GetSnackBar(message: ex.message,duration: Duration(seconds: 2)));
+      print('EXCEPTION - ${ex.message}');
+      // throw ex;
     }
   }
 
