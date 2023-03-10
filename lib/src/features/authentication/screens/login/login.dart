@@ -19,14 +19,15 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
           children: [
             // Background image
             Image.asset(
               loginBackground,
               fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
             ),
 
             // Container widget on top of the background image

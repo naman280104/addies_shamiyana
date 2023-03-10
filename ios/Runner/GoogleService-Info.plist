@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>650960716861-psgkmo91a3qsr725tntkb8h36l1u0uco.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.650960716861-psgkmo91a3qsr725tntkb8h36l1u0uco</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>650960716861-7tfqdml3fpcsm97bbcbmcd4vs0ut84uo.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBYixSuK_4sHF1VHaJKM_u_Kt6lRCa8QbE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>650960716861</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.addiesShamiyana</string>
+	<key>PROJECT_ID</key>
+	<string>addies-83af7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>addies-83af7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:650960716861:ios:e02c05591528b3e1b25654</string>
+	<key>DATABASE_URL</key>
+	<string>https://addies-83af7-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>

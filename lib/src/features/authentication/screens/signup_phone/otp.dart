@@ -1,20 +1,25 @@
 import 'package:addies_shamiyana/src/constants/image_strings.dart';
-import 'package:addies_shamiyana/src/features/authentication/screens/login/login.dart';
-import 'package:addies_shamiyana/src/features/authentication/screens/login_phone/login_phone.dart';
-import 'package:addies_shamiyana/src/features/menu/screens/mainPage.dart';
+import 'package:addies_shamiyana/src/features/authentication/controllers/signup_controller.dart';
+import 'package:addies_shamiyana/src/features/authentication/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../constants/text_strings.dart';
+import '../../controllers/otp_controller.dart';
 
 
 class MyVerifySignup extends StatefulWidget {
-  const MyVerifySignup({Key? key}) : super(key: key);
-
+  final UserModel user;
+  MyVerifySignup({Key? key,required this.user}) : super(key: key);
   @override
   State<MyVerifySignup> createState() => _MyVerifySignupState();
 }
 
 class _MyVerifySignupState extends State<MyVerifySignup> {
+  var otp;
+  // late final UserModel user;
+  // final OTPcontroller = Get.put(OTPController());
+  final signupcontroller = Get.put(SignUpController());
 
   @override
   Widget build(BuildContext context) {
@@ -92,19 +97,24 @@ class _MyVerifySignupState extends State<MyVerifySignup> {
               Pinput(
                 length: 6,
                 showCursor: true,
+                onCompleted: (value){
+                  otp = value;
+                },
               ),
               SizedBox(
                 height: 20,
               ),
               SizedBox(
-                width: double.infinity,
+                width: MediaQuery.of(context).size.width,
                 height: 45,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () {
-                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>MainPage()));
+                      // OTPController.instance.verifyOTP(otp);
+                      SignUpController.instance.verifyOTP(otp,widget.user);
+                      // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>MainPage()));
                     },
                     child: Text(verifyPhoneno)),
               ),

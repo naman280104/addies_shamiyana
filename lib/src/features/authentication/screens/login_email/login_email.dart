@@ -31,8 +31,8 @@ class _LoginEmailState extends State<LoginEmail> {
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(20, 18, 20, 0),
-        width: double.infinity,
-        height: double.infinity,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         color: primaryWhite,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

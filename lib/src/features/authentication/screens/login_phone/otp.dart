@@ -1,5 +1,4 @@
 import 'package:addies_shamiyana/src/constants/image_strings.dart';
-import 'package:addies_shamiyana/src/features/authentication/screens/login/login.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/login_phone/login_phone.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -17,6 +16,7 @@ class _MyVerifyState extends State<MyVerify> {
 
   @override
   Widget build(BuildContext context) {
+    var otp;
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
@@ -100,7 +100,7 @@ class _MyVerifyState extends State<MyVerify> {
                 height: 20,
               ),
               SizedBox(
-                width: double.infinity,
+                width: MediaQuery.of(context).size.width,
                 height: 45,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(

@@ -39,6 +39,10 @@ dependencies:
   flutter_signin_button: ^2.0.0
   pinput: ^2.2.31
   line_awesome_flutter: ^2.0.0
+  firebase_core: ^2.7.1
+  firebase_auth: ^4.2.10
+  get: ^4.6.5
+  cloud_firestore: ^4.4.4
 
 dev_dependencies:
   flutter_test:

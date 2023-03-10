@@ -18,26 +18,31 @@ class _LoadingState extends State<Loading> {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login()));
     });
-    return Container(
-      color: primaryWhite,
-      child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Column(
-            children: [
-              const SizedBox(height: 93,),
-              const Center(
-                child: CircleAvatar(
-                  backgroundImage: AssetImage(logoString),
-                  radius: 130,
+    return SingleChildScrollView(
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
 
+        color: primaryWhite,
+        child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Column(
+              children: [
+                const SizedBox(height: 93,),
+                const Center(
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage(logoString),
+                    radius: 130,
+
+                  ),
                 ),
-              ),
-              const SizedBox(height: 117,),
-              Container(
-                  color: Colors.transparent,
-                  child: Image(image: AssetImage(nameString,))),
-            ],
-          )
+                const SizedBox(height: 117,),
+                Container(
+                    color: Colors.transparent,
+                    child: Image(image: AssetImage(nameString,))),
+              ],
+            )
+        ),
       ),
     );
   }

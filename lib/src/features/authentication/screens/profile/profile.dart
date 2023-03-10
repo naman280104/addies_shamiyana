@@ -1,6 +1,7 @@
 import 'package:addies_shamiyana/src/constants/colors.dart';
 import 'package:addies_shamiyana/src/constants/image_strings.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/profile/update_profile_screen.dart';
+import 'package:addies_shamiyana/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -69,7 +70,7 @@ class _ProfileState extends State<Profile> {
                 ProfileMenuWidget(title: "Settings", onPress: (){}, icon: LineAwesomeIcons.cog,iconcolor: Theme.of(context).primaryColor,),
                 ProfileMenuWidget(title: "Your Orders", onPress: (){}, icon: LineAwesomeIcons.wallet,iconcolor: Theme.of(context).primaryColor),
                 ProfileMenuWidget(title: "Your Info", onPress: (){}, icon: LineAwesomeIcons.info,iconcolor: Theme.of(context).primaryColor,),
-                ProfileMenuWidget(title: "Logout", onPress: (){}, icon: LineAwesomeIcons.alternate_sign_out,endIcon: false,textColor: Colors.orange[800],iconcolor: Colors.orange[800]),
+                ProfileMenuWidget(title: "Logout", onPress: (){AuthenticationRepository.instance.logout();}, icon: LineAwesomeIcons.alternate_sign_out,endIcon: false,textColor: Colors.orange[800],iconcolor: Colors.orange[800]),
                 ProfileMenuWidget(title: "Delete Account", onPress: (){}, icon: LineAwesomeIcons.remove_user,endIcon: false,textColor: Colors.red[600],iconcolor: Colors.red[600])
               ],
             ),

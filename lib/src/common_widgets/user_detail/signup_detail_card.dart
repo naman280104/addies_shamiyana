@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:addies_shamiyana/src/features/authentication/screens/signup_phone/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +12,7 @@ class detail_card extends StatelessWidget {
     required this.type,
     this.needVerify = false,
     this.oText=false,
+    required this.controllerfun,
   });
 
   final IconData icon;
@@ -17,6 +20,7 @@ class detail_card extends StatelessWidget {
   final bool needVerify;
   final TextInputType type;
   final bool oText;
+  final TextEditingController controllerfun;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,6 +39,7 @@ class detail_card extends StatelessWidget {
                 SizedBox(width: 10),
                 Expanded(
                   child: TextFormField(
+                    controller: controllerfun,
                     keyboardType: type,
                     obscureText:oText,
                     decoration: InputDecoration(

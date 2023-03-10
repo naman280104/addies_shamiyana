@@ -179,7 +179,7 @@ class _BelowHomeState extends State<BelowHome> {
     else {
       return Container(
         height: 582,
-        width:double.infinity,
+        width:MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,

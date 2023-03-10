@@ -87,7 +87,7 @@ class _MyPhoneState extends State<MyPhone> {
                 height: 20,
               ),
               SizedBox(
-                width: double.infinity,
+                width: MediaQuery.of(context).size.width,
                 height: 45,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
