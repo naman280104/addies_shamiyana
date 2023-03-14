@@ -7,6 +7,8 @@ import 'package:addies_shamiyana/src/features/authentication/screens/signup/sign
 import 'package:addies_shamiyana/src/features/menu/screens/mainPage.dart';
 import 'package:addies_shamiyana/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:addies_shamiyana/src/repository/user_repository/user_repository.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +16,7 @@ import '../screens/signup_phone/otp.dart';
 
 class SignUpController extends GetxController{
   static SignUpController get instance =>Get.find();
+
 
   //Text field controllers
   final email = TextEditingController();
@@ -25,6 +28,7 @@ class SignUpController extends GetxController{
   final userRepo = Get.put(UserRepository());
   final authrepo = Get.put(AuthenticationRepository());
   final isuserexist = IsUserExist();
+  final _auth = FirebaseAuth.instance;
 
 
   void registerUserbyemail(String email,String password, UserModel user)async{
@@ -34,6 +38,8 @@ class SignUpController extends GetxController{
       Get.showSnackbar(GetSnackBar(message: error.toString(),));
     }
     else{
+      user.email_uid = _auth.currentUser?.uid;
+      print(_auth.currentUser?.uid);
       userRepo.createUser(user);
       Get.offAll(()=>MainPage());
     }
@@ -42,6 +48,7 @@ class SignUpController extends GetxController{
 
   void verifyOTP(String OTP,UserModel user) async{
     var isverified = await authrepo.verifyOTP(OTP);
+    user.phone_uid = _auth.currentUser?.uid;
     isverified ? registerUserbyemail(user.email, user.password,user): Get.back();
   }
 

@@ -1,5 +1,6 @@
 
 import 'package:addies_shamiyana/src/features/authentication/controllers/userexist.dart';
+import 'package:addies_shamiyana/src/features/authentication/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 

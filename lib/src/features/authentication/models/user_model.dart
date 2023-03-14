@@ -1,13 +1,14 @@
 class UserModel{
-  final String? id;
+  String? email_uid;
+  String? phone_uid;
   final String fName;
   final String lName;
   final String phoneNo;
   final String email;
   final String password;
 
-  const UserModel({
-    this.id,
+  UserModel({
+    // this.id,
     required this.fName,
     required this.lName,
     required this.phoneNo,
@@ -23,6 +24,8 @@ class UserModel{
       "phoneNo" :phoneNo,
       "email" :email,
       "Password" :password,
+      "email_uid":email_uid,
+      "phone_uid":phone_uid,
     };
   }
 }
