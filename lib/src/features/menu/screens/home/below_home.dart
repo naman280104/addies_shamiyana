@@ -1,4 +1,4 @@
-import 'package:addies_shamiyana/src/common_widgets/category.dart';
+import 'package:addies_shamiyana/src/features/menu/screens/search/category_tile.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/colors.dart';
@@ -43,7 +43,7 @@ class _BelowHomeState extends State<BelowHome> {
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [Category(),Category(),Category()],
+                  children: [CategoryTile(categoryTitle:'Test'),CategoryTile(categoryTitle:'Test'), CategoryTile(categoryTitle:'Test')],
                 ),
               )
             ],
