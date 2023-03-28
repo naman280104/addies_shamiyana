@@ -18,6 +18,7 @@ class _SearchState extends State<Search> {
   List<String> categories = [];
   List<Widget> categoryTiles = [];
   List<dynamic> menu = [];
+  Map<String, List<dynamic>> categoryItems = {};
 
   Map<String, Map<String, List<dynamic>>> subCategories = {};
 
@@ -51,25 +52,28 @@ class _SearchState extends State<Search> {
     // print(menu);
     categories = [];
     categoryTiles = [];
+    categoryItems = {};
     for (int i = 0; i < menu.length; i++) {
       if (categories.contains(menu[i]["category"])) {
-
+        categoryItems[menu[i]["category"]]?.add(menu[i]);
       }
       else {
         categories.add(menu[i]["category"]);
+        categoryItems[menu[i]["category"]] = [];
+        categoryItems[menu[i]["category"]]?.add(menu[i]);
       }
     }
     // print(categories);
 
     for (int i = 0; i < categories.length; i += 3) {
       Widget w1 = i < categories.length
-          ? CategoryTile(categoryTitle: categories[i])
+          ? CategoryTile(categoryTitle: categories[i], categoryItems: categoryItems[categories[i]],)
           : const SizedBox(height: 100, width: 100);
       Widget w2 = i + 1 < categories.length
-          ? CategoryTile(categoryTitle: categories[i + 1])
+          ? CategoryTile(categoryTitle: categories[i+1], categoryItems: categoryItems[categories[i+1]],)
           : const SizedBox(height: 100, width: 100);
       Widget w3 = i + 2 < categories.length
-          ? CategoryTile(categoryTitle: categories[i + 2])
+          ? CategoryTile(categoryTitle: categories[i+2], categoryItems: categoryItems[categories[i+2]],)
           : const SizedBox(height: 100, width: 100);
       categoryTiles.add(Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -184,14 +188,6 @@ class _SearchState extends State<Search> {
                         spacing: 20.0,
                         runSpacing: 10.0,
                         children: categoryTiles,
-
-                        // children: const [
-                        //   Category(),
-                        //   Category(),
-                        //   Category(),
-                        //   Category(),
-                        //   Category(),
-                        //   Category(),],
                       ),
                     ),
                   ],

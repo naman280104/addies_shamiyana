@@ -1,14 +1,15 @@
 import 'dart:math';
 import 'package:addies_shamiyana/src/features/authentication/screens/profile/profile.dart';
-
+import 'package:addies_shamiyana/src/features/menu/screens/search/category_items.dart';
 import 'package:flutter/material.dart';
 
 class CategoryTile extends StatefulWidget {
 
   final String categoryTitle;
-  final dynamic categoryChildren;
+  // final List<dynamic> categoryItems;
+  final dynamic categoryItems;
   final dynamic subCategories;
-  const CategoryTile({Key? key, required this.categoryTitle, this.subCategories, this.categoryChildren}) : super(key: key);
+  const CategoryTile({Key? key, required this.categoryTitle, this.subCategories, this.categoryItems}) : super(key: key);
 
 
 
@@ -17,11 +18,22 @@ class CategoryTile extends StatefulWidget {
 }
 
 class _CategoryTileState extends State<CategoryTile> {
+
+  String getTitle() {
+    return widget.categoryTitle;
+  }
+
+  dynamic getItems() {
+    print(widget.categoryItems);
+    return widget.categoryItems;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> CategoryItems(title: getTitle(),items: getItems(),)));
       },
       child: SizedBox(
         width: 100,
