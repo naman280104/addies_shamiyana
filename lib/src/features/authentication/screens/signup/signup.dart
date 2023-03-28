@@ -7,6 +7,9 @@ import 'package:flutter_signin_button/button_view.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/login/login.dart';
 import 'package:flutter/material.dart';
 
+//temp fix
+import './../../../../features/menu/screens/mainPage.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -70,7 +73,7 @@ class _SignUpState extends State<SignUp> {
                               // ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Login()));
+                                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>MainPage()));
                                   // Navigate to sign up screen
                                 },
                                 child: Text(AlreadyHaveaccount),
