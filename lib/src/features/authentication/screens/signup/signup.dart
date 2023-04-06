@@ -73,7 +73,10 @@ class _SignUpState extends State<SignUp> {
                               // ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>MainPage()));
+                                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Login()));
+
+                                  // -----------------------BYPASS FOR TESTING-------------------------
+                                  // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>MainPage()));
                                   // Navigate to sign up screen
                                 },
                                 child: Text(AlreadyHaveaccount),
@@ -82,7 +85,6 @@ class _SignUpState extends State<SignUp> {
                           ),
                         )
                     ),
-
                   ],
                 ),
               ))

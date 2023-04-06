@@ -3,19 +3,28 @@ import 'package:flutter/material.dart';
 
 
 class CartCard extends StatefulWidget {
-  const CartCard({Key? key}) : super(key: key);
 
+  final Map<String, dynamic> itemInfo;
+  final int quantity;
+  const CartCard({Key? key, required this.itemInfo, required this.quantity}) : super(key: key);
   @override
   State<CartCard> createState() => _CartCardState();
 }
 
 class _CartCardState extends State<CartCard> {
+
+  ValueNotifier<int> count = ValueNotifier(0);
+
   @override
   Widget build(BuildContext context) {
+
+    count.value = widget.quantity;
+
     return Container(
         margin: EdgeInsets.symmetric(vertical: 10),
-        height: 140,
-        width: 350,
+        // height: 140,
+        padding: EdgeInsets.all(10),
+        width: 300,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -31,35 +40,40 @@ class _CartCardState extends State<CartCard> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 100,
-                width: 100,
-                margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColorLight,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Theme.of(context).secondaryHeaderColor,
-                    width: 0.1,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 100,
+                    width: 100,
+                    // margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColorLight,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Theme.of(context).secondaryHeaderColor,
+                        width: 0.1,
+                      ),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: const Image(
+                        image: AssetImage("assets/images/todayspecial.png"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: const Image(
-                    image: AssetImage("assets/images/todayspecial.png"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                ],
               ),
               Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      margin: EdgeInsets.fromLTRB(15, 20, 0, 0),
+                      margin: EdgeInsets.fromLTRB(15, 10, 0, 0),
                       width: 150,
                       child: Text(
-                        "Chocolate Cold Coffee",
+                        widget.itemInfo['name'],
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -69,7 +83,7 @@ class _CartCardState extends State<CartCard> {
                       margin: EdgeInsets.fromLTRB(15, 1, 0, 0),
                       width: 150,
                       child: Text(
-                        "Cold Coffee with chocolatey Taste",
+                        widget.itemInfo['description'],
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(fontSize: 12),
@@ -82,42 +96,50 @@ class _CartCardState extends State<CartCard> {
                         margin: EdgeInsets.fromLTRB(15, 10, 0, 0),
                         width: 50,
                         child: Text(
-                          "Rs. 35",
+                          widget.itemInfo.containsKey('price') ? 'Rs. ${widget.itemInfo['price']}' : 'Rs. 300',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).shadowColor,
                               fontSize: 13),
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(80, 5, 0, 0),
-                        padding: EdgeInsets.all(0),
-                        height: 20,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: (){},
-                              child: Image.asset("assets/images/Minus.png"),
+                      Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(80, 10, 0, 0),
+                            padding: EdgeInsets.all(0),
+                            height: 20,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: (){
+                                    count.value > 1 ?
+                                    count.value -= 1: null ;},
+                                  child: Image.asset("assets/images/Minus.png"),
+                                ),
+                                SizedBox(
+                                  width: 25.0,
+                                  child: ValueListenableBuilder(
+                                      valueListenable: count,
+                                      builder: (context, value, child)  {
+                                        return Text('${count.value}',
+                                          style: TextStyle(fontSize: 13),
+                                          textAlign: TextAlign.center,
+                                        );
+                                      }),
+                                ),
+                                InkWell(
+                                  onTap: (){
+                                    count.value < 9 ?
+                                    count.value += 1 : null;},
+                                  child: Image.asset("assets/images/Plus.png"),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              width: 25.0,
-                              child: Text("1",
-                                style: TextStyle(fontSize: 13),
-                                textAlign: TextAlign.center,
-                                // decoration: InputDecoration(
-                                //   border: InputBorder.none,
-                                //   contentPadding: EdgeInsets.all(0),
-                                // ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: (){},
-                              child: Image.asset("assets/images/Plus.png"),
-                            ),
-                          ],
-                        ),
 
+                          ),
+                        ],
                       ),
 
                     ],
@@ -125,15 +147,6 @@ class _CartCardState extends State<CartCard> {
 
                 ],
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                width: 17,
-                child: InkWell(
-                  onTap: (){},
-                  child: Image.asset("assets/images/Close.png"),
-                ),
-              ),
-
             ]
         )
     );

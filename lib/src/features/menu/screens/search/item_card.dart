@@ -1,23 +1,33 @@
+import 'package:addies_shamiyana/src/features/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:addies_shamiyana/src/constants/colors.dart';
-
+import 'package:provider/provider.dart';
 
 class ItemCard extends StatefulWidget {
 
-  final String name;
-  Map<String, dynamic> itemInfo;
-  ItemCard({Key? key, required this.name, required this.itemInfo}) : super(key: key);
+  // final String name;
+  final Map<String, dynamic> itemInfo;
+  const ItemCard({Key? key, required this.itemInfo}) : super(key: key);
 
   @override
   State<ItemCard> createState() => _ItemCardState();
 }
 
 class _ItemCardState extends State<ItemCard> {
+
+  ValueNotifier<int> count = ValueNotifier(1);
+
+  void addToCart(itemInfo, value) {
+    final provider = Provider.of<CartProvider>(context, listen: false);
+    provider.addItem(itemInfo, value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.symmetric(vertical: 10),
-        height: 140,
+        // height: 140,
+        padding: EdgeInsets.all(10),
         width: 350,
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -34,35 +44,40 @@ class _ItemCardState extends State<ItemCard> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 100,
-                width: 100,
-                margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColorLight,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Theme.of(context).secondaryHeaderColor,
-                    width: 0.1,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 100,
+                    width: 100,
+                    // margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColorLight,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Theme.of(context).secondaryHeaderColor,
+                        width: 0.1,
+                      ),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: const Image(
+                        image: AssetImage("assets/images/todayspecial.png"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: const Image(
-                    image: AssetImage("assets/images/todayspecial.png"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                ],
               ),
               Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      margin: EdgeInsets.fromLTRB(15, 20, 0, 0),
+                      margin: EdgeInsets.fromLTRB(15, 10, 0, 0),
                       width: 150,
                       child: Text(
-                        widget.name,
+                        widget.itemInfo['name'],
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -71,8 +86,8 @@ class _ItemCardState extends State<ItemCard> {
                   Container(
                       margin: EdgeInsets.fromLTRB(15, 1, 0, 0),
                       width: 150,
-                      child: const Text(
-                        "Cold Coffee with chocolatey Taste",
+                      child: Text(
+                        widget.itemInfo['description'],
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(fontSize: 12),
@@ -85,42 +100,79 @@ class _ItemCardState extends State<ItemCard> {
                         margin: EdgeInsets.fromLTRB(15, 10, 0, 0),
                         width: 50,
                         child: Text(
-                          "Rs. 35",
+                        widget.itemInfo.containsKey('price') ? 'Rs. ${widget.itemInfo['price']}' : 'Rs. 300',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).shadowColor,
                               fontSize: 13),
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(80, 5, 0, 0),
-                        padding: EdgeInsets.all(0),
-                        height: 20,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: (){},
-                              child: Image.asset("assets/images/Minus.png"),
+                      Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(80, 10, 0, 0),
+                            padding: EdgeInsets.all(0),
+                            height: 20,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: (){
+                                    count.value > 1 ?
+                                    count.value -= 1: null ;},
+                                  child: Image.asset("assets/images/Minus.png"),
+                                ),
+                                SizedBox(
+                                  width: 25.0,
+                                  child: ValueListenableBuilder(
+                                      valueListenable: count,
+                                      builder: (context, value, child)  {
+                                        return Text('${count.value}',
+                                          style: TextStyle(fontSize: 13),
+                                          textAlign: TextAlign.center,
+                                        );
+                                  }),
+                                ),
+                                InkWell(
+                                  onTap: (){
+                                    count.value < 9 ?
+                                    count.value += 1 : null;},
+                                  child: Image.asset("assets/images/Plus.png"),
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              width: 25.0,
-                              child: Text("1",
-                                style: TextStyle(fontSize: 13),
-                                textAlign: TextAlign.center,
-                                // decoration: InputDecoration(
-                                //   border: InputBorder.none,
-                                //   contentPadding: EdgeInsets.all(0),
-                                // ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: (){},
-                              child: Image.asset("assets/images/Plus.png"),
-                            ),
-                          ],
-                        ),
 
+                          ),
+                          Container(
+                            height: 30,
+                            // width: 70,
+                            margin: EdgeInsets.fromLTRB(80, 5, 0, 0),
+                            padding: EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(5),
+                              ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  // onTap: (){addToCart(widget.itemInfo, count.value);},
+                                  onTap: () {context.read<CartProvider>().addItem(widget.itemInfo, count.value);},
+                                  child: Text(
+                                      'Add to Cart',
+                                    style: TextStyle(
+                                      color: Theme.of(context).canvasColor,
+                                    ),
+                                  )
+
+                                  ),
+                              ],
+                            ),
+                            ),
+
+
+                        ],
                       ),
 
                     ],
@@ -128,17 +180,9 @@ class _ItemCardState extends State<ItemCard> {
 
                 ],
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                width: 17,
-                child: InkWell(
-                  onTap: (){},
-                  child: Image.asset("assets/images/Close.png"),
-                ),
-              ),
-
             ]
         )
     );
   }
+
 }

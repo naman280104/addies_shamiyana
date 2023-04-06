@@ -1,9 +1,13 @@
+import 'package:addies_shamiyana/src/features/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/colors.dart';
 
 class CartValue extends StatefulWidget {
-  const CartValue({Key? key}) : super(key: key);
+
+  final int value;
+  const CartValue({Key? key, required this.value}) : super(key: key);
 
   @override
   State<CartValue> createState() => _CartValueState();
@@ -15,7 +19,7 @@ class _CartValueState extends State<CartValue> {
     return Container(
       margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
       decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
@@ -33,7 +37,7 @@ class _CartValueState extends State<CartValue> {
         children: [
           Container(
               margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
-              child: const Text("Your Total is: Rs. 474",
+              child: Text('Your Total is: Rs. ${Provider.of<CartProvider>(context).totalAmount()}',
                 style: TextStyle(fontSize: 20,
                     fontWeight: FontWeight.w500),
               )
@@ -86,7 +90,6 @@ class _CartValueState extends State<CartValue> {
                     child: const Text("Delivery")
                 ),
               ),
-
             ],
           )
         ],

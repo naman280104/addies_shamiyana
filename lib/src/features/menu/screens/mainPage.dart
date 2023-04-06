@@ -2,7 +2,9 @@ import 'package:addies_shamiyana/src/constants/image_strings.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/profile/profile.dart';
 import 'package:addies_shamiyana/src/features/menu/screens/cart/cart.dart';
 import 'package:addies_shamiyana/src/features/menu/screens/search/search.dart';
+import 'package:addies_shamiyana/src/features/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/colors.dart';
 import 'home/home.dart';
@@ -16,13 +18,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final pages = const [
-    Home(),
-    Search(),
-    Cart(),
-    // Search(),
-    // Cart(),
-  ];
+
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
@@ -32,8 +28,9 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -65,7 +62,11 @@ class _MainPageState extends State<MainPage> {
         ),
         body: IndexedStack(
           index: _selectedIndex,
-          children: pages,
+          children: const [
+            Home(),
+            Search(),
+            Cart(),
+          ],
         ),
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(),

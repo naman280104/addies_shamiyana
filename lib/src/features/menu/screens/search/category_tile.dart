@@ -1,6 +1,5 @@
-import 'dart:math';
-import 'package:addies_shamiyana/src/features/authentication/screens/profile/profile.dart';
 import 'package:addies_shamiyana/src/features/menu/screens/search/category_items.dart';
+import 'package:addies_shamiyana/src/features/menu/screens/search/utilities.dart';
 import 'package:flutter/material.dart';
 
 class CategoryTile extends StatefulWidget {
@@ -20,11 +19,15 @@ class CategoryTile extends StatefulWidget {
 class _CategoryTileState extends State<CategoryTile> {
 
   String getTitle() {
-    return widget.categoryTitle;
+    return toTitleCase(widget.categoryTitle);
+  }
+
+  String getTitle_10orLess() {
+    return getTitle().length > 10 ? '${getTitle().substring(0, 10)}...' : getTitle();
   }
 
   dynamic getItems() {
-    print(widget.categoryItems);
+    // print(widget.categoryItems);
     return widget.categoryItems;
   }
 
@@ -59,7 +62,7 @@ class _CategoryTileState extends State<CategoryTile> {
               ),
             ),
             const SizedBox(height: 10,),
-            Text(widget.categoryTitle.substring(0, min(widget.categoryTitle.length, 10)) + '...',
+            Text(getTitle_10orLess(),
               // overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 15),)
           ],
