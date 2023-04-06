@@ -14,7 +14,6 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
 
-  // List<Map<String, dynamic>> menu = finalMenu;
   List<String> categories = [];
   List<Widget> categoryTiles = [];
   List<dynamic> menu = [];
@@ -22,34 +21,8 @@ class _SearchState extends State<Search> {
 
   Map<String, Map<String, List<dynamic>>> subCategories = {};
 
-  // Map<> subCategories = {};
-
-  // void makeSubCategories() {
-  //   for (int i = 0; i < menu.length; i++) {
-  //     dynamic item = menu[i];
-  //
-  //     if (subCategories.containsKey(item["category"])) {
-  //       if (subCategories[item["category"]]?.containsKey(item["subCategory"]) != nullzz) {
-  //         subCategories[item["category"]][item["subCategory"]].add(item);
-  //       }
-  //       else {
-  //         subCategories[item["category"]][item["subCategory"]] = [];
-  //         subCategories[item["category"]][item["subCategory"]].add(item);
-  //       }
-  //     }
-  //     else {
-  //       subCategories[item["category"]] = {};
-  //       subCategories[item["category"]][item["subCategory"]] = [];
-  //       subCategories[item["category"]][item["subCategory"]].add(item);
-  //     }
-  //   }
-  // }
-
-
   List<Widget> makeCategories(List<dynamic> menu) {
-    // List<dynamic> menu = fetchMenu();
-    // print("make cat");
-    // print(menu);
+
     categories = [];
     categoryTiles = [];
     categoryItems = {};
@@ -63,7 +36,6 @@ class _SearchState extends State<Search> {
         categoryItems[menu[i]["category"]]?.add(menu[i]);
       }
     }
-    // print(categories);
 
     for (int i = 0; i < categories.length; i += 3) {
       Widget w1 = i < categories.length
@@ -83,7 +55,6 @@ class _SearchState extends State<Search> {
     }
     return categoryTiles;
 
-    // makeSubCategories();
   }
 
 
@@ -124,7 +95,6 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
 
-    // makeCategories();
     fetchMenu();
 
     return SingleChildScrollView(
