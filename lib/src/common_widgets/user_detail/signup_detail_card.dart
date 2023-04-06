@@ -14,7 +14,6 @@ class detail_card extends StatelessWidget {
     this.oText=false,
     required this.controllerfun,
   });
-
   final IconData icon;
   final String title;
   final bool needVerify;

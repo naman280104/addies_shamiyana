@@ -36,8 +36,7 @@ class LoginEmailForm extends StatelessWidget {
                   onPressed: (){
                     if(_formKey.currentState!.validate()){
                       // SignUpController.instance.registerUserbyemail(controller.email.text.trim(), controller.password.text.trim());
-                      // SignUpController.instance.phoneAuthentication("+91"+controller.phoneNo.text.trim());
-
+                      // SignUpController.instance.phoneAuth+entication("+91"+controller.phoneNo.text.trim());
                       LoginController.instance.LogInWithEmailAndPassword(controller.email.text.trim(), controller.password.text.trim());
                     }
                   },

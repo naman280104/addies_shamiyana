@@ -19,7 +19,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
       backgroundColor: primaryWhite,
       appBar: AppBar(
         backgroundColor: primaryWhite,
-        title: Text("Edit Profile",style: Theme.of(context).textTheme.titleLarge,),
+        title: Text("Your Info",style: Theme.of(context).textTheme.titleLarge,),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -48,38 +48,21 @@ class _UpdateProfileState extends State<UpdateProfile> {
                  child: Column(
                    children: [
                      TextFormField(
-                       decoration: InputDecoration(label: Text("First Name"),prefixIcon: Icon(Icons.person_outline_rounded),border: OutlineInputBorder()),
+                       decoration: InputDecoration(label: Text("First Name"),prefixIcon: Icon(Icons.person_outline_rounded),border: OutlineInputBorder(),enabled: false),
                      ),
                      SizedBox(height:10,),
                      TextFormField(
-                       decoration: InputDecoration(label: Text("Last Name"),prefixIcon: Icon(Icons.person_outline_rounded),border: OutlineInputBorder()),
+                       decoration: InputDecoration(label: Text("Last Name"),prefixIcon: Icon(Icons.person_outline_rounded),border: OutlineInputBorder(),enabled: false),
                      ),
                      SizedBox(height: 10,),
                      TextFormField(
-                       decoration: InputDecoration(label: Text("Phone number"),prefixIcon: Icon(Icons.phone),border: OutlineInputBorder()),
+                       decoration: InputDecoration(label: Text("Phone number"),prefixIcon: Icon(Icons.phone),border: OutlineInputBorder(),enabled: false),
                      ),
                      SizedBox(height: 10,),
                      TextFormField(
-                       decoration: InputDecoration(label: Text("Email"),prefixIcon: Icon(Icons.email),border: OutlineInputBorder()),
-                     ),
-                     SizedBox(height: 10,),
-                     TextFormField(
-                       obscureText: true,
-                       decoration: InputDecoration(label: Text("Password"),prefixIcon: Icon(Icons.password),border: OutlineInputBorder()),
+                       decoration: InputDecoration(label: Text("Email"),prefixIcon: Icon(Icons.email),border: OutlineInputBorder(),enabled: false),
                      ),
                      SizedBox(height: 20,),
-                     SizedBox(
-                       width: 200,
-                       height: 50,
-                       child: ElevatedButton(
-                         onPressed: (){Navigator.pop(context);},
-                         style: ElevatedButton.styleFrom(
-                           backgroundColor: Theme.of(context).primaryColor, side: BorderSide.none,shape:const StadiumBorder()
-                         ),
-                         child: Text("Edit Profile",style: TextStyle(color: primaryBlack),),
-                       ),
-                     )
-
                    ],
                  )
                 )

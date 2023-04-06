@@ -1,7 +1,6 @@
 import 'package:addies_shamiyana/src/constants/image_strings.dart';
 import 'package:addies_shamiyana/src/constants/text_strings.dart';
 import 'package:addies_shamiyana/src/features/authentication/controllers/login_controller.dart';
-import 'package:addies_shamiyana/src/features/authentication/screens/login_phone/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

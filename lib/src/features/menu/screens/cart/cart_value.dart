@@ -38,6 +38,7 @@ class _CartValueState extends State<CartValue> {
           Container(
               margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
               child: Text('Your Total is: Rs. ${Provider.of<CartProvider>(context).totalAmount()}',
+              //     child: Text('Your Total is: Rs. ${widget.value}',
                 style: TextStyle(fontSize: 20,
                     fontWeight: FontWeight.w500),
               )

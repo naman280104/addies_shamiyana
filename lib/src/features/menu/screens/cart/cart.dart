@@ -37,7 +37,6 @@ class _CartState extends State<Cart> {
       });
       return cart_card_list;
     }
-
     int getAmount() => totalAmount;
 
     return Column(
@@ -69,7 +68,8 @@ class _CartState extends State<Cart> {
               ),
           ),
         ),
-        CartValue(value: Provider.of<CartProvider>(context).totalAmount())
+        // CartValue(value: Provider.of<CartProvider>(context).totalAmount())
+        CartValue(value: getAmount())
       ],
     );
 
