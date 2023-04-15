@@ -1,8 +1,15 @@
+import 'dart:convert';
+
 import 'package:addies_shamiyana/src/constants/colors.dart';
+import 'package:addies_shamiyana/src/features/authentication/controllers/login_logout_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 import '../../../../constants/image_strings.dart';
+import '../../../../shared_pref.dart';
+import '../../controllers/userexist.dart';
 
 
 class UpdateProfile extends StatefulWidget {
@@ -13,8 +20,26 @@ class UpdateProfile extends StatefulWidget {
 }
 
 class _UpdateProfileState extends State<UpdateProfile> {
+  var contr = Get.put(LoginController());
+  var user;
+  getuser() async{
+    String User = await SharedPref.getStringValuesSF("User");
+    setState(() {
+      user = json.decode(User);
+    });
+  }
+  @override
+  void initState(){
+    super.initState();
+    getuser();
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    if(user==null){
+      return CircularProgressIndicator();
+    }
     return Scaffold(
       backgroundColor: primaryWhite,
       appBar: AppBar(
@@ -48,19 +73,19 @@ class _UpdateProfileState extends State<UpdateProfile> {
                  child: Column(
                    children: [
                      TextFormField(
-                       decoration: InputDecoration(label: Text("First Name"),prefixIcon: Icon(Icons.person_outline_rounded),border: OutlineInputBorder(),enabled: false),
+                       decoration: InputDecoration(label: Text(user["First Name"]!+" "),prefixIcon: Icon(Icons.person_outline_rounded),border: OutlineInputBorder(),enabled: false),
                      ),
                      SizedBox(height:10,),
                      TextFormField(
-                       decoration: InputDecoration(label: Text("Last Name"),prefixIcon: Icon(Icons.person_outline_rounded),border: OutlineInputBorder(),enabled: false),
+                       decoration: InputDecoration(label: Text(user["Last Name"]+" "),prefixIcon: Icon(Icons.person_outline_rounded),border: OutlineInputBorder(),enabled: false),
                      ),
                      SizedBox(height: 10,),
                      TextFormField(
-                       decoration: InputDecoration(label: Text("Phone number"),prefixIcon: Icon(Icons.phone),border: OutlineInputBorder(),enabled: false),
+                       decoration: InputDecoration(label: Text(user["phoneNo"]!+" "),prefixIcon: Icon(Icons.phone),border: OutlineInputBorder(),enabled: false),
                      ),
                      SizedBox(height: 10,),
                      TextFormField(
-                       decoration: InputDecoration(label: Text("Email"),prefixIcon: Icon(Icons.email),border: OutlineInputBorder(),enabled: false),
+                       decoration: InputDecoration(label: Text(user["email"]!+" "),prefixIcon: Icon(Icons.email),border: OutlineInputBorder(),enabled: false),
                      ),
                      SizedBox(height: 20,),
                    ],

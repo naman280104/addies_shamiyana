@@ -1,14 +1,16 @@
+import 'package:addies_shamiyana/src/features/authentication/controllers/login_logout_controller.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/loading/loading.dart';
 import 'package:addies_shamiyana/src/features/menu/screens/mainPage.dart';
 import 'package:addies_shamiyana/src/repository/authentication_repository/exceptions/login_email_passsword_failure.dart';
+import 'package:addies_shamiyana/src/shared_pref.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'exceptions/singup_email_password_failure.dart';
 
 class AuthenticationRepository extends GetxController{
-
   static AuthenticationRepository get instance=>Get.find();
   var _instance = FirebaseFirestore.instance;
   //variables
@@ -22,6 +24,8 @@ class AuthenticationRepository extends GetxController{
     Future.delayed(const Duration(seconds: 6));
     firebaseUser = Rx<User?>(_auth.currentUser);
     firebaseUser.bindStream(_auth.userChanges());
+    //Return String
+
     ever(firebaseUser, _setInitialScreen);
   }
 
@@ -111,7 +115,7 @@ class AuthenticationRepository extends GetxController{
     await _auth.signOut();
   }
 
-  Future<void> deleteUser()async{
+  Future<void> deleteUser(String passwd_delete)async{
     // Get.deleteAll();
     // FirebaseAuth.instance.
     if(_auth.currentUser?.phoneNumber!=null){
@@ -126,14 +130,14 @@ class AuthenticationRepository extends GetxController{
           docRef.get().then(
                 (DocumentSnapshot doc) async {
               final data = doc.data() as Map<String, dynamic>;
-              final password = data['Password'];
+              // final password = data['Password'];
               final email = data['email'];
               // final email_uid = data['email_uid'];
               // final phoneNo_uid = data['phone_uid'];
               // print(email_uid);
               // print(phoneNo_uid);
               // try{
-                await _auth.currentUser?.delete();
+              //   await _auth.currentUser?.delete();
               //   // if(_auth.currentUser==null){
               //   //   await _auth.signInWithEmailAndPassword(email: email, password: password);
               //   //   User? user = _auth.currentUser;
@@ -142,12 +146,12 @@ class AuthenticationRepository extends GetxController{
               //   }
               // }
               // catch(e){
-                print(_auth.currentUser);
-                print(" hello");
-                print(email);
-                print(password);
+              //   print(_auth.currentUser);
+              //   print(" hello");
+              //   print(email);
+              //   print(password);
                   // if(_auth.currentUser==null){
-                  await _auth.signInWithEmailAndPassword(email: email, password: password);
+                  await _auth.signInWithEmailAndPassword(email: email, password: passwd_delete);
                   _auth.currentUser?.delete();
 
               FirebaseFirestore.instance.collection("User").doc(documentid).delete();

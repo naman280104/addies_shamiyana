@@ -1,6 +1,6 @@
 import 'package:addies_shamiyana/src/constants/image_strings.dart';
 import 'package:addies_shamiyana/src/constants/text_strings.dart';
-import 'package:addies_shamiyana/src/features/authentication/controllers/login_controller.dart';
+import 'package:addies_shamiyana/src/features/authentication/controllers/login_logout_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +13,7 @@ class MyPhone extends StatefulWidget {
 
 class _MyPhoneState extends State<MyPhone> {
   final controller = Get.put(LoginController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

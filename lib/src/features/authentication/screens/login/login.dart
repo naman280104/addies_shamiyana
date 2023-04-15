@@ -5,8 +5,6 @@ import 'package:addies_shamiyana/src/features/authentication/screens/login_email
 import 'package:addies_shamiyana/src/features/authentication/screens/login_phone/login_phone.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/signup/signup.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -50,7 +48,7 @@ class _LoginState extends State<Login> {
                       Center(
                         child: Container(
                           width: 300,
-                          height: 300,
+                          height: 250,
                           margin: EdgeInsets.fromLTRB(0, 60, 0, 0),
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
@@ -93,22 +91,22 @@ class _LoginState extends State<Login> {
                                         icon: const Icon(Icons.email),
                                         label: const Text("Continue with Email",style: TextStyle(fontWeight: FontWeight.w400),)
                                     ),
-                                    Row(
-                                      children: const [
-                                        Expanded(child: Divider()),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(horizontal: 16),
-                                          child: Text("or"),
-                                        ),
-                                        Expanded(child: Divider()),
-                                      ],
-                                    ),
-                                    SignInButton(
-
-                                      Buttons.Google,
-                                      text: signinGoogle,
-                                      onPressed: () {},
-                                    ),
+                                    // Row(
+                                    //   children: const [
+                                    //     Expanded(child: Divider()),
+                                    //     Padding(
+                                    //       padding: EdgeInsets.symmetric(horizontal: 16),
+                                    //       child: Text("or"),
+                                    //     ),
+                                    //     Expanded(child: Divider()),
+                                    //   ],
+                                    // ),
+                                    // SignInButton(
+                                    //
+                                    //   Buttons.Google,
+                                    //   text: signinGoogle,
+                                    //   onPressed: () {},
+                                    // ),
                                     Container(
                                       height: 4,
                                       width: 270,

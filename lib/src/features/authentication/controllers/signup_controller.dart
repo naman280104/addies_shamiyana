@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:addies_shamiyana/src/constants/text_strings.dart';
 import 'package:addies_shamiyana/src/features/authentication/controllers/otp_controller.dart';
 import 'package:addies_shamiyana/src/features/authentication/controllers/userexist.dart';
@@ -12,6 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../../shared_pref.dart';
 import '../screens/signup_phone/otp.dart';
 
 class SignUpController extends GetxController{
@@ -41,6 +44,7 @@ class SignUpController extends GetxController{
       user.email_uid = _auth.currentUser?.uid;
       print(_auth.currentUser?.uid);
       userRepo.createUser(user);
+      await SharedPref.addStringToSF("User",json.encode(user));
       Get.offAll(()=>MainPage());
     }
   }

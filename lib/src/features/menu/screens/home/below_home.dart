@@ -24,10 +24,11 @@ class _BelowHomeState extends State<BelowHome> {
               Center(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).primaryColorLight,
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(
                       width: 0.1,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   padding: const EdgeInsets.fromLTRB(37, 5, 37, 5),
@@ -56,7 +57,7 @@ class _BelowHomeState extends State<BelowHome> {
               Center(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).primaryColorLight,
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(
                       color: Theme.of(context).primaryColor,

@@ -1,6 +1,8 @@
 import 'package:addies_shamiyana/src/features/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:addies_shamiyana/src/constants/colors.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 
 class ItemCard extends StatefulWidget {
@@ -28,16 +30,9 @@ class _ItemCardState extends State<ItemCard> {
         margin: EdgeInsets.symmetric(vertical: 10),
         // height: 140,
         padding: EdgeInsets.all(10),
-        width: 350,
+        width: 360,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Theme.of(context).primaryColor,
-              primaryYellow,
-            ],
-          ),
+          color: Theme.of(context).primaryColorLight,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
@@ -158,7 +153,11 @@ class _ItemCardState extends State<ItemCard> {
                               children: [
                                 InkWell(
                                   // onTap: (){addToCart(widget.itemInfo, count.value);},
-                                  onTap: () {context.read<CartProvider>().addItem(widget.itemInfo, count.value);},
+                                  onTap: () {
+                                    context.read<CartProvider>().addItem(widget.itemInfo, count.value);
+                                    Get.showSnackbar(GetSnackBar(message: "Added Successfully!",duration: Duration(seconds: 1),));
+                                    // Get.to(const SnackBar(content: Text("Added Successfully!",style: TextStyle(color: Colors.green),),));
+                                  },
                                   child: Text(
                                       'Add to Cart',
                                     style: TextStyle(

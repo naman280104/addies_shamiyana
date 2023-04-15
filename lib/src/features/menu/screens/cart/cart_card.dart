@@ -1,23 +1,22 @@
 import 'package:addies_shamiyana/src/constants/colors.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import '../../../provider/cart_provider.dart';
 
 class CartCard extends StatefulWidget {
-
   final Map<String, dynamic> itemInfo;
   final int quantity;
-  const CartCard({Key? key, required this.itemInfo, required this.quantity}) : super(key: key);
+  const CartCard({Key? key, required this.itemInfo, required this.quantity})
+      : super(key: key);
   @override
   State<CartCard> createState() => _CartCardState();
 }
 
 class _CartCardState extends State<CartCard> {
-
   ValueNotifier<int> count = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
-
     count.value = widget.quantity;
 
     return Container(
@@ -96,7 +95,9 @@ class _CartCardState extends State<CartCard> {
                         margin: EdgeInsets.fromLTRB(15, 10, 0, 0),
                         width: 50,
                         child: Text(
-                          widget.itemInfo.containsKey('price') ? 'Rs. ${widget.itemInfo['price']}' : 'Rs. 300',
+                          widget.itemInfo.containsKey('price')
+                              ? 'Rs. ${widget.itemInfo['price']}'
+                              : 'Rs. 300',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).shadowColor,
@@ -113,42 +114,44 @@ class _CartCardState extends State<CartCard> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 InkWell(
-                                  onTap: (){
-                                    count.value > 1 ?
-                                    count.value -= 1: null ;},
+                                  onTap: () {
+                                    if (count.value > 0) {
+                                      count.value -= 1;
+                                      Provider.of<CartProvider>(context,listen: false).reduceItem(widget.itemInfo);
+                                    }
+                                  },
                                   child: Image.asset("assets/images/Minus.png"),
                                 ),
                                 SizedBox(
                                   width: 25.0,
                                   child: ValueListenableBuilder(
                                       valueListenable: count,
-                                      builder: (context, value, child)  {
-                                        return Text('${count.value}',
+                                      builder: (context, value, child) {
+                                        return Text(
+                                          '${count.value}',
                                           style: TextStyle(fontSize: 13),
                                           textAlign: TextAlign.center,
                                         );
                                       }),
                                 ),
                                 InkWell(
-                                  onTap: (){
-                                    count.value < 9 ?
-                                    count.value += 1 : null;},
+                                  onTap: () {
+                                    if (count.value < 9) {
+                                      count.value += 1;
+                                      Provider.of<CartProvider>(context,listen: false).addItem(widget.itemInfo, 1);
+                                    }
+                                  },
                                   child: Image.asset("assets/images/Plus.png"),
                                 ),
                               ],
                             ),
-
                           ),
                         ],
                       ),
-
                     ],
                   ),
-
                 ],
               ),
-            ]
-        )
-    );
+            ]));
   }
 }

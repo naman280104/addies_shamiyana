@@ -114,7 +114,7 @@ class _SearchState extends State<Search> {
               child: Container(
                 padding: const EdgeInsets.fromLTRB(30, 0, 2, 0),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColorLight,
+                  color: Theme.of(context).dividerColor,
                   borderRadius: BorderRadius.circular(40),
                 ),
                 child: Row(

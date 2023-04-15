@@ -1,12 +1,8 @@
 import 'dart:convert';
-import 'package:collection/collection.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
 
-
 class CartProvider extends ChangeNotifier{
-
-  final Map<String,int> _items = {
+  late final Map<String,int> _items = {
     // jsonEncode({
     //   "name": "PERI PERI FRIES",
     //   "description": "",
@@ -43,9 +39,15 @@ class CartProvider extends ChangeNotifier{
   void reduceItem(Map<String, dynamic> itemInfo) {
     itemInfo = Map.fromEntries(itemInfo.entries.toList()..sort((e1, e2) => e1.key.compareTo(e2.key)));
     String key = jsonEncode(itemInfo);
-    if(_items.containsKey(key)) {
-      _items[key] = _items[itemInfo]! - 1;
-      notifyListeners();
+    print(_items);
+    print(key);
+    if(_items.containsKey(key)){
+      if(_items[key]==1){
+        _items.remove(key);
+      }
+      else{
+        _items[key] = _items[key]! - 1;
+      }
     }
     notifyListeners();
   }
@@ -62,11 +64,18 @@ class CartProvider extends ChangeNotifier{
       int price = ((jsonDecode(key))['price'] as int);
       print(price);
       amt+=value*price;
-      print(amt);
+        print(amt);
     });
-
-
     return amt;
   }
 
+  void removeAll(){
+    var lst=[];
+    _items.forEach((key, value) {
+      lst.add(key);
+    });
+    lst.forEach((element) {
+      _items.remove(element);
+    });
+  }
 }

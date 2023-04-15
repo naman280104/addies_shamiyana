@@ -1,4 +1,4 @@
-import 'package:addies_shamiyana/src/features/authentication/controllers/login_controller.dart';
+import 'package:addies_shamiyana/src/features/authentication/controllers/login_logout_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../common_widgets/user_detail/login_email_card.dart';

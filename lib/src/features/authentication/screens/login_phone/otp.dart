@@ -1,10 +1,9 @@
 import 'package:addies_shamiyana/src/constants/image_strings.dart';
-import 'package:addies_shamiyana/src/features/authentication/controllers/login_controller.dart';
+import 'package:addies_shamiyana/src/features/authentication/controllers/login_logout_controller.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/login_phone/login_phone.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../constants/text_strings.dart';
-import 'package:get/get.dart';
 
 class MyVerify extends StatefulWidget {
   const MyVerify({Key? key}) : super(key: key);

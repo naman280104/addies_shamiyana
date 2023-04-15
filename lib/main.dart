@@ -8,13 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]);
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value) => Get.put(AuthenticationRepository()));
-  // if(Platform.isAndroid){
-  //   SharedPreferences.
-  // }
   runApp(const MyApp());
 }
 
@@ -28,7 +25,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
           debugShowCheckedModeBanner:false,
           theme: AppTheme.lightTheme,
-          home: Loading(),
+          home: const Loading(),
         ),
     );
   }

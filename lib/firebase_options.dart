@@ -45,13 +45,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyClHcktxOEnDNMlkEeg4AFQkuzYiGkFDlM',
-    appId: '1:650960716861:web:5c88a3aad719af48b25654',
+    appId: '1:650960716861:web:83bd37aee58f08c0b25654',
     messagingSenderId: '650960716861',
     projectId: 'addies-83af7',
     authDomain: 'addies-83af7.firebaseapp.com',
     databaseURL: 'https://addies-83af7-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'addies-83af7.appspot.com',
-    measurementId: 'G-GRET5QTL9T',
+    measurementId: 'G-L6D7E0V3QP',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -70,7 +70,7 @@ class DefaultFirebaseOptions {
     projectId: 'addies-83af7',
     databaseURL: 'https://addies-83af7-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'addies-83af7.appspot.com',
-    androidClientId: '650960716861-7tfqdml3fpcsm97bbcbmcd4vs0ut84uo.apps.googleusercontent.com',
+    androidClientId: '650960716861-6akkkb31375h4vcckh4leml8arfttsdb.apps.googleusercontent.com',
     iosClientId: '650960716861-psgkmo91a3qsr725tntkb8h36l1u0uco.apps.googleusercontent.com',
     iosBundleId: 'com.example.addiesShamiyana',
   );
@@ -82,7 +82,7 @@ class DefaultFirebaseOptions {
     projectId: 'addies-83af7',
     databaseURL: 'https://addies-83af7-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'addies-83af7.appspot.com',
-    androidClientId: '650960716861-7tfqdml3fpcsm97bbcbmcd4vs0ut84uo.apps.googleusercontent.com',
+    androidClientId: '650960716861-6akkkb31375h4vcckh4leml8arfttsdb.apps.googleusercontent.com',
     iosClientId: '650960716861-psgkmo91a3qsr725tntkb8h36l1u0uco.apps.googleusercontent.com',
     iosBundleId: 'com.example.addiesShamiyana',
   );

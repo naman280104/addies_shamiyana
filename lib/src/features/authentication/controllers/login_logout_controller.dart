@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../repository/authentication_repository/authentication_repository.dart';
 import '../../../repository/user_repository/user_repository.dart';
+import '../../../shared_pref.dart';
 import '../../menu/screens/mainPage.dart';
 import '../screens/login_phone/otp.dart';
 
@@ -19,8 +20,11 @@ class LoginController extends GetxController{
   final authrepo = Get.put(AuthenticationRepository());
   final isuserexist = IsUserExist();
 
+
   void LogInWithEmailAndPassword(String email,String password)async{
     await AuthenticationRepository.instance.LoginWithEmailAndPassword(email, password);
+    isuserexist.checkUserExistByEmail(email);
+
   }
 
   void LogInWithPhoneNoAndOTP(String phoneNo)async{
@@ -31,6 +35,7 @@ class LoginController extends GetxController{
     else{
       phoneAuthentication(phoneNo);
       Get.to(()=>MyVerify());
+      isuserexist.checkUserByPhone(phoneNo);
     }
   }
 
@@ -43,4 +48,16 @@ class LoginController extends GetxController{
     print(isverified);
     isverified ? Get.offAll(()=>MainPage()): Get.back();
   }
+
+  void logout()async{
+    await AuthenticationRepository.instance.logout();
+    await SharedPref.removeValues("User");
+  }
+
+  void delete(String passwd)async{
+    await AuthenticationRepository.instance.deleteUser(passwd);
+  }
+
+
+
 }
