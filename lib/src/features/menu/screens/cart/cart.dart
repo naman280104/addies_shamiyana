@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:addies_shamiyana/src/features/provider/cart_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../../../../constants/colors.dart';
+import '../../../../shared_pref.dart';
 import 'cart_card.dart';
 
 class Cart extends StatefulWidget {
@@ -18,8 +20,42 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   var _razorpay = Razorpay();
+
+  var finalUser;
+  getuser() async{
+    String user = await SharedPref.getStringValuesSF("User");
+    setState(() {
+      finalUser = json.decode(user);
+    });
+  }
+
+  orderDetailsToUpload (dynamic paymentID) async{
+    var cart_items = Provider.of<CartProvider>(context,listen:false).items;
+    Map<String, int> itemsInfo = {};
+
+    cart_items.forEach((key, value) {
+      itemsInfo[jsonDecode(key)['name']] = value;
+    });
+
+    Map<String, dynamic> orderDetails = {};
+
+    orderDetails['itemsOrdered'] = itemsInfo;
+    orderDetails['orderTime'] = DateTime.now();
+    orderDetails['orderedBy'] = finalUser;
+    orderDetails['paymentID'] = paymentID.toString();
+    orderDetails['amount'] = Provider.of<CartProvider>(context,listen:false).totalAmount();
+
+    final db = FirebaseFirestore.instance;
+    db.collection("Orders")
+        .add(orderDetails)
+        .then((documentSnapshot) => print("Added Data with ID: ${documentSnapshot.id}"));
+  }
+
+
+
   @override
   void initState() {
+    getuser();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
@@ -28,6 +64,9 @@ class _CartState extends State<Cart> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     // Do something when payment succeeds
+
+    dynamic paymentID = response.paymentId;
+    orderDetailsToUpload(paymentID);
     print("Payment Successful");
     Navigator.of(context).pop();
     setState(() {});
@@ -208,12 +247,12 @@ class _CartState extends State<Cart> {
               var options = {
                 'key': 'rzp_test_PkbndanRwjV6wD'	,
                 'amount': (Provider.of<CartProvider>(context,listen:false).totalAmount()*100).toString(),
-                'name': 'Testing 1',
-                'description': 'Fine T-Shirt',
+                'name': finalUser["First Name"],
+                'description': 'test desc',
                 'timeout':300,
                 'prefill': {
-                  'contact': '8888888888',
-                  'email': 'test@razorpay.com'
+                  'contact': finalUser["phoneNo"],
+                  'email': finalUser["email"],
                 }
               };
               _razorpay.open(options);

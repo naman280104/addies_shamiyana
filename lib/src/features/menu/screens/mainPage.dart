@@ -2,14 +2,8 @@ import 'package:addies_shamiyana/src/constants/image_strings.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/profile/profile.dart';
 import 'package:addies_shamiyana/src/features/menu/screens/cart/cart.dart';
 import 'package:addies_shamiyana/src/features/menu/screens/search/search.dart';
-import 'package:addies_shamiyana/src/features/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:provider/provider.dart';
-
 import '../../../constants/colors.dart';
-import '../../authentication/controllers/login_logout_controller.dart';
 import 'home/home.dart';
 
 
