@@ -1,4 +1,5 @@
 import 'package:addies_shamiyana/src/constants/colors.dart';
+import 'package:addies_shamiyana/src/features/menu/screens/search/item_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -16,13 +17,17 @@ class _SearchState extends State<Search> {
 
   List<String> categories = [];
   List<Widget> categoryTiles = [];
-  List<dynamic> menu = [];
+  List<dynamic> menu_ = [];
+  List<Widget> searchResults = [];
   Map<String, List<dynamic>> categoryItems = {};
+  bool searchFocused = false;
+  final searchTextController = TextEditingController();
 
   Map<String, Map<String, List<dynamic>>> subCategories = {};
 
   List<Widget> makeCategories(List<dynamic> menu) {
 
+    menu_ = menu;
     categories = [];
     categoryTiles = [];
     categoryItems = {};
@@ -59,12 +64,6 @@ class _SearchState extends State<Search> {
 
 
 
-
-
-
-
-
-
   List<dynamic> fetchMenu() {
     var _instance = FirebaseFirestore.instance;
     // print("In fetch");
@@ -88,6 +87,23 @@ class _SearchState extends State<Search> {
         }
     );
     return [{"Error": "Something2"}];
+  }
+
+  void getSearchResults(String query) {
+    List<Widget> results = [];
+    print(query);
+    for (var element in menu_) {
+      // ''.toLowerCase()
+      // print(1);
+      if(element['name'].toLowerCase().contains(query.toLowerCase())) {
+        results.add(ItemCard(itemInfo: element)) ;
+      }
+    }
+    print(results.length);
+    setState(() {
+      searchResults = results;
+    });
+    // return results;
   }
 
 
@@ -123,8 +139,18 @@ class _SearchState extends State<Search> {
                       child: Builder(
                           builder: (context) {
                             return TextFormField(
+                              controller: searchTextController,
                               onTap:(){
-
+                                setState(() {
+                                  searchFocused = true;
+                                });
+                              },
+                              onTapOutside: (event){
+                                // FocusManager.instance.primaryFocus?.unfocus();
+                                // searchFocused = false;
+                              },
+                              onChanged: (query){
+                                getSearchResults(query);
                               },
                               decoration: const InputDecoration(
                                 hintText: 'Search...',
@@ -138,9 +164,18 @@ class _SearchState extends State<Search> {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.search),
+                      icon: searchFocused ? Icon(Icons.close) : Icon(Icons.search),
                       onPressed: () {
-                        // Perform search
+                        // close button pressed
+                        if (searchFocused) {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          searchFocused = false;
+                          searchTextController.clear();
+                        }
+                        // search button pressed
+                        else {
+                          searchFocused = true;
+                        }
                       },
                       splashRadius: 10,
                     ),
@@ -149,20 +184,30 @@ class _SearchState extends State<Search> {
               ),
             ),
             const SizedBox(height: 20,),
-            Container(
-                height: 500,
-                child: ListView(
-                  children: [
-                    Center(
-                      child: Wrap(
-                        spacing: 20.0,
-                        runSpacing: 10.0,
-                        children: categoryTiles,
+            Visibility(
+              visible: !searchFocused,
+              child: Container(
+                  height: 500,
+                  child: ListView(
+                    children: [
+                      Center(
+                        child: Wrap(
+                          spacing: 20.0,
+                          runSpacing: 10.0,
+                          children: categoryTiles,
+                        ),
                       ),
-                    ),
-                  ],
-                )
-            )
+                    ],
+                  )
+              ),
+            ),
+            Visibility(
+                visible: searchFocused,
+                child: Center(
+                  child: Column(
+                    children: searchResults,
+                  ),
+                ))
 
           ]
       ),
