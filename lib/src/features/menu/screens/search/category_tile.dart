@@ -1,3 +1,4 @@
+import 'package:addies_shamiyana/src/constants/colors.dart';
 import 'package:addies_shamiyana/src/features/menu/screens/search/category_items.dart';
 import 'package:addies_shamiyana/src/features/menu/screens/search/utilities.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,10 @@ class _CategoryTileState extends State<CategoryTile> {
 
   @override
   Widget build(BuildContext context) {
+
+    String imgLocation = "assets/images/${widget.categoryTitle}.png";
+    // String imgLocation = "assets/images/logo.png";
+    // print(imgLocation);
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context)=> CategoryItems(title: getTitle(),items: getItems(),)));
@@ -47,7 +52,7 @@ class _CategoryTileState extends State<CategoryTile> {
               height: 100,
               width: 100,
               decoration: BoxDecoration(
-                color: Theme.of(context).secondaryHeaderColor,
+                color: primaryWhite,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
                   color: Theme.of(context).primaryColorLight,
@@ -55,10 +60,15 @@ class _CategoryTileState extends State<CategoryTile> {
                 ),
 
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: const Image(image: AssetImage("assets/images/pizza.jpg"),
-                  fit: BoxFit.cover,),
+              child: Container(
+                padding: EdgeInsets.all(10),
+                // child: ClipRRect(
+                //   borderRadius: BorderRadius.circular(20),
+                //   child: const Image(image: AssetImage("assets/images/pizza.jpg"),
+                //     fit: BoxFit.cover,),
+                // ),
+                child: Image(image: AssetImage(imgLocation),
+                      fit: BoxFit.cover,),
               ),
             ),
             const SizedBox(height: 10,),

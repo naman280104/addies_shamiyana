@@ -56,8 +56,8 @@ class _ItemCardState extends State<ItemCard> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: const Image(
-                        image: AssetImage("assets/images/todayspecial.png"),
+                      child: Image(
+                        image: AssetImage("assets/images/${widget.itemInfo['category']}.png"),
                         fit: BoxFit.cover,
                       ),
                     ),
