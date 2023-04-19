@@ -54,12 +54,11 @@ class _ItemCardState extends State<ItemCard> {
                         width: 0.1,
                       ),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image(
-                        image: AssetImage("assets/images/${widget.itemInfo['category']}.png"),
-                        fit: BoxFit.cover,
-                      ),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+
+                      child: Image(image: AssetImage("assets/images/${widget.itemInfo["category"]}.png"),
+                        fit: BoxFit.cover,),
                     ),
                   ),
                 ],

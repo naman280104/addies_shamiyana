@@ -9,7 +9,8 @@ class CategoryTile extends StatefulWidget {
   // final List<dynamic> categoryItems;
   final dynamic categoryItems;
   final dynamic subCategories;
-  const CategoryTile({Key? key, required this.categoryTitle, this.subCategories, this.categoryItems}) : super(key: key);
+  final dynamic onTapAllowed;
+  const CategoryTile({Key? key, required this.categoryTitle, this.subCategories, this.categoryItems, this.onTapAllowed = true}) : super(key: key);
 
 
 
@@ -41,6 +42,7 @@ class _CategoryTileState extends State<CategoryTile> {
     // print(imgLocation);
     return InkWell(
       onTap: () {
+        if (widget.onTapAllowed)
         Navigator.push(context, MaterialPageRoute(builder: (context)=> CategoryItems(title: getTitle(),items: getItems(),)));
       },
       child: SizedBox(
@@ -62,11 +64,7 @@ class _CategoryTileState extends State<CategoryTile> {
               ),
               child: Container(
                 padding: EdgeInsets.all(10),
-                // child: ClipRRect(
-                //   borderRadius: BorderRadius.circular(20),
-                //   child: const Image(image: AssetImage("assets/images/pizza.jpg"),
-                //     fit: BoxFit.cover,),
-                // ),
+
                 child: Image(image: AssetImage(imgLocation),
                       fit: BoxFit.cover,),
               ),

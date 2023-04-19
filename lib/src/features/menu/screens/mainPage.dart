@@ -3,7 +3,9 @@ import 'package:addies_shamiyana/src/features/authentication/screens/profile/pro
 import 'package:addies_shamiyana/src/features/menu/screens/cart/cart.dart';
 import 'package:addies_shamiyana/src/features/menu/screens/search/search.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../constants/colors.dart';
+import '../../provider/cart_provider.dart';
 import 'home/home.dart';
 
 
@@ -72,24 +74,54 @@ class _MainPageState extends State<MainPage> {
           child: BottomNavigationBar(
             // type: BottomNavigationBarType.shifting,
             backgroundColor: Theme.of(context).indicatorColor,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
+            items: <BottomNavigationBarItem>[
+              const BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
               ),
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: 'Search',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart),
+                icon: Stack(
+                  children: [
+                    Icon(Icons.shopping_cart),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Container(
+                        height: 12,
+                        width: 12,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        // padding: EdgeInsets.all(5),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                        '${Provider.of<CartProvider>(context).totalItems()}', // Replace this with the actual number to display
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 10,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 label: 'Cart',
               ),
             ],
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
-            selectedItemColor: Colors.black54, // Set selected item color
-            unselectedItemColor: Theme.of(context).disabledColor,
+            selectedItemColor: Colors.black, // Set selected item color
+            unselectedItemColor: Colors.white70,
           ),
         ));
   }

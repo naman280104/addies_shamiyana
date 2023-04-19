@@ -44,7 +44,7 @@ class _BelowHomeState extends State<BelowHome> {
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [CategoryTile(categoryTitle:'Test'),CategoryTile(categoryTitle:'Test'), CategoryTile(categoryTitle:'Test')],
+                  children: [CategoryTile(categoryTitle:'Garlic Breads', onTapAllowed: false,),CategoryTile(categoryTitle:'Calzones', onTapAllowed: false), CategoryTile(categoryTitle:'Drinks & Shakes', onTapAllowed: false)],
                 ),
               )
             ],
