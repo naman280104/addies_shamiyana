@@ -33,7 +33,7 @@ class _ProfileState extends State<Profile> {
   @override
   void initState(){
     super.initState();
-      getuser();
+    getuser();
   }
 
 
@@ -82,12 +82,12 @@ class _ProfileState extends State<Profile> {
                 ProfileMenuWidget(title: "Settings", onPress: (){}, icon: LineAwesomeIcons.cog,iconcolor: Theme.of(context).primaryColor,),
                 ProfileMenuWidget(title: "Your Orders", onPress: (){}, icon: LineAwesomeIcons.wallet,iconcolor: Theme.of(context).primaryColor),
                 ProfileMenuWidget(title: "Your Info", onPress: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateProfile()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateProfile()));
                 }, icon: LineAwesomeIcons.info,iconcolor: Theme.of(context).primaryColor,),
                 ProfileMenuWidget(title: "Logout", onPress: (){controller.logout();}, icon: LineAwesomeIcons.alternate_sign_out,endIcon: false,textColor: Colors.orange[800],iconcolor: Colors.orange[800]),
                 ProfileMenuWidget(title: "Delete Account", onPress: (){
                   showCustomDisplay(context);
-                  }, icon: LineAwesomeIcons.remove_user,endIcon: false,textColor: Colors.red[600],iconcolor: Colors.red[600])
+                }, icon: LineAwesomeIcons.remove_user,endIcon: false,textColor: Colors.red[600],iconcolor: Colors.red[600])
               ],
             ),
           ),
@@ -99,37 +99,37 @@ class _ProfileState extends State<Profile> {
     showDialog(context: context,
         builder: (context)=>AlertDialog(
           content: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text("Enter Password to confirm"),
-              SizedBox(height: 20,),
-              TextFormField(
-              onChanged: (value){
-                setState(() {
-                  passwd = value;
-                });
-              },
-              decoration: InputDecoration(label: Text("Delete"),prefixIcon: Icon(Icons.delete),border: OutlineInputBorder()),
-            ),
-            ]
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Enter Password to confirm"),
+                SizedBox(height: 20,),
+                TextFormField(
+                  onChanged: (value){
+                    setState(() {
+                      passwd = value;
+                    });
+                  },
+                  decoration: InputDecoration(label: Text("Delete"),prefixIcon: Icon(Icons.delete),border: OutlineInputBorder()),
+                ),
+              ]
           ),
-            actions: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(onPressed: (){
-                    Navigator.of(context).pop();
-                  }, child: Text("Cancel",style: TextStyle(color: Colors.black87))),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(onPressed: (){
+                  Navigator.of(context).pop();
+                }, child: Text("Cancel",style: TextStyle(color: Colors.black87))),
 
-                  TextButton(onPressed: (){
-                    controller.delete(passwd);
-                  }, child: Text("Delete",style: TextStyle(color: Colors.red)),)
-                ],
-              )
+                TextButton(onPressed: (){
+                  controller.delete(passwd);
+                }, child: Text("Delete",style: TextStyle(color: Colors.red)),)
+              ],
+            )
 
 
-            ],
+          ],
         ));
   }
 }
