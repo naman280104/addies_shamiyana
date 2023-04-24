@@ -41,7 +41,8 @@ class _CartState extends State<Cart> {
 
     orderDetails['itemsOrdered'] = itemsInfo;
     orderDetails['orderTime'] = DateTime.now();
-    orderDetails['orderedBy'] = finalUser;
+    orderDetails['orderedEmail'] = finalUser['email'];
+    orderDetails['orderPhone'] = finalUser['phoneNo'];
     orderDetails['paymentID'] = paymentID.toString();
     orderDetails['amount'] = Provider.of<CartProvider>(context,listen:false).totalAmount();
 
