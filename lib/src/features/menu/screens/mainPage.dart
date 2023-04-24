@@ -91,8 +91,8 @@ class _MainPageState extends State<MainPage> {
                       top: 0,
                       left: 0,
                       child: Container(
-                        height: 12,
-                        width: 12,
+                        height: 13,
+                        width: 13,
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,

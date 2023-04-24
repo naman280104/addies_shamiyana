@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:addies_shamiyana/src/constants/colors.dart';
 import 'package:addies_shamiyana/src/constants/image_strings.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/profile/update_profile_screen.dart';
+import 'package:addies_shamiyana/src/features/menu/screens/cart/my_orders.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -80,7 +81,10 @@ class _ProfileState extends State<Profile> {
 
 
                 ProfileMenuWidget(title: "Settings", onPress: (){}, icon: LineAwesomeIcons.cog,iconcolor: Theme.of(context).primaryColor,),
-                ProfileMenuWidget(title: "Your Orders", onPress: (){}, icon: LineAwesomeIcons.wallet,iconcolor: Theme.of(context).primaryColor),
+                ProfileMenuWidget(title: "Your Orders", onPress: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyOrder()));
+
+                }, icon: LineAwesomeIcons.wallet,iconcolor: Theme.of(context).primaryColor),
                 ProfileMenuWidget(title: "Your Info", onPress: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateProfile()));
                 }, icon: LineAwesomeIcons.info,iconcolor: Theme.of(context).primaryColor,),
