@@ -74,7 +74,7 @@ class _SearchState extends State<Search> {
           // print("then");
           // final data = doc.data() as Map<String, List<Map<String, dynamic>>>;
           final data = doc.data() as Map<String, dynamic>;
-          // print(data['menu']);
+          print('menu fetched');
           setState(() {
             // menu = data['menu'];
             categoryTiles = makeCategories(data['menu']);
@@ -106,13 +106,18 @@ class _SearchState extends State<Search> {
     // return results;
   }
 
+  @override
+  void initState() {
+    super.initState();
+    fetchMenu();
+  }
+
+
+
 
 
   @override
   Widget build(BuildContext context) {
-
-    fetchMenu();
-
     return SingleChildScrollView(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

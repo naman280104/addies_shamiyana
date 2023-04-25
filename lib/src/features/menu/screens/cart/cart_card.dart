@@ -56,7 +56,6 @@ class _CartCardState extends State<CartCard> {
                     ),
                     child: Container(
                       padding: EdgeInsets.all(10),
-
                       child: Image(image: AssetImage("assets/images/${widget.itemInfo["category"]}.png"),
                         fit: BoxFit.cover,),
                     ),
