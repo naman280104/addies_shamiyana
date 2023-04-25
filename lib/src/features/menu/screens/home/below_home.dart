@@ -1,4 +1,5 @@
 import 'package:addies_shamiyana/src/features/menu/screens/search/category_tile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/colors.dart';
@@ -14,9 +15,85 @@ class BelowHome extends StatefulWidget {
 class _BelowHomeState extends State<BelowHome> {
   bool popup=false;
 
+  List<String> categories = [];
+  List<Widget> categoryTiles = [];
+  List<dynamic> menu_ = [];
+  Map<String, List<dynamic>> categoryItems = {};
+  Map<String, Map<String, List<dynamic>>> subCategories = {};
+  Map<String, dynamic> todaySpecial = {};
+
+
+  List<Widget> makeFavCategories(List<dynamic> menu) {
+
+    menu_ = menu;
+    categories = [];
+    List<Widget> categoryTiles = [];
+    categoryItems = {};
+    for (int i = 0; i < menu.length; i++) {
+      if (categories.contains(menu[i]["category"])) {
+        categoryItems[menu[i]["category"]]?.add(menu[i]);
+      }
+      else {
+        categories.add(menu[i]["category"]);
+        categoryItems[menu[i]["category"]] = [];
+        categoryItems[menu[i]["category"]]?.add(menu[i]);
+      }
+    }
+
+
+    categoryTiles.add(CategoryTile(categoryTitle: 'Garlic Breads', categoryItems: categoryItems['Garlic Breads'],));
+    categoryTiles.add(CategoryTile(categoryTitle: 'Calzones', categoryItems: categoryItems['Calzones'],));
+    categoryTiles.add(CategoryTile(categoryTitle: 'Drinks & Shakes', categoryItems: categoryItems['Drinks & Shakes'],));
+
+    return categoryTiles;
+
+  }
+
+
+  List<dynamic> fetchMenu() {
+    var _instance = FirebaseFirestore.instance;
+    final docRef = _instance.collection("Menu").doc("FullMenu");
+    docRef.get()
+        .then((DocumentSnapshot doc) {
+          final data = doc.data() as Map<String, dynamic>;
+          print(data['menu'][0]);
+          setState(() {
+            categoryTiles = makeFavCategories(data['menu']);
+          });
+          // return data['menu'];
+        },
+        onError: (e) {
+          return [{"Error": "Something1"}];
+        }
+    );
+    return [{"Error": "Something2"}];
+  }
+
+  void fetchTodaySpecial() {
+    var _instance = FirebaseFirestore.instance;
+    final docRef = _instance.collection("Menu").doc("Today Special");
+    docRef.get()
+        .then((DocumentSnapshot doc) {
+          final docData = doc.data() as Map<String, dynamic>;
+          setState(() {
+            todaySpecial = docData['special'];
+          });
+    });
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    fetchMenu();
+    fetchTodaySpecial();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-    if (!popup) {
+    if (!popup && categoryTiles != [] && todaySpecial != {}) {
       return Column(
         children: [
           Column(
@@ -44,7 +121,7 @@ class _BelowHomeState extends State<BelowHome> {
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [CategoryTile(categoryTitle:'Garlic Breads', onTapAllowed: false,),CategoryTile(categoryTitle:'Calzones', onTapAllowed: false), CategoryTile(categoryTitle:'Drinks & Shakes', onTapAllowed: false)],
+                  children: categoryTiles,
                 ),
               )
             ],
@@ -116,8 +193,8 @@ class _BelowHomeState extends State<BelowHome> {
                         Container(
                             margin: const EdgeInsets.fromLTRB(15, 20, 0, 0),
                             width: 150,
-                            child: const Text(
-                              "Chocolate Cold Coffee",
+                            child: Text(
+                              todaySpecial['name'],
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -126,8 +203,8 @@ class _BelowHomeState extends State<BelowHome> {
                         Container(
                             margin: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                             width: 150,
-                            child: const Text(
-                              "Cold Coffee with chocolatey Taste",
+                            child: Text(
+                              todaySpecial['description'],
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(fontSize: 12),
@@ -141,7 +218,7 @@ class _BelowHomeState extends State<BelowHome> {
                                       15, 30, 0, 0),
                                   width: 50,
                                   child: Text(
-                                    "Rs. 35",
+                                    'Rs. ${todaySpecial['price']}',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Theme.of(context).primaryColorDark,
@@ -177,7 +254,7 @@ class _BelowHomeState extends State<BelowHome> {
         ],
       );
     }
-    else {
+    else if(popup){
       return Container(
         height: 582,
         width:MediaQuery.of(context).size.width,
@@ -265,6 +342,9 @@ class _BelowHomeState extends State<BelowHome> {
           ],
         ),
       );
+    }
+    else {
+      return CircularProgressIndicator();
     }
   }
 }

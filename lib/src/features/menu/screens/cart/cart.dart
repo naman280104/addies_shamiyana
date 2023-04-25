@@ -100,7 +100,9 @@ class _CartState extends State<Cart> {
         cart_card_list
             .add(CartCard(itemInfo: jsonDecode(key), quantity: value));
         totalitem.value += value;
-        totalAmount += (jsonDecode(key)['price'] * value) as int;
+        totalAmount += jsonDecode(key).containsKey('price')
+            ? (jsonDecode(key)['price'] * value) as int
+            : (300 * value) as int;
       });
       return cart_card_list;
     }

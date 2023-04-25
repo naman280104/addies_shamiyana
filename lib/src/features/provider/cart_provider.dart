@@ -61,7 +61,7 @@ class CartProvider extends ChangeNotifier{
     print(amt);
     print(_items);
     _items.forEach((key, value) {
-      int price = ((jsonDecode(key))['price'] as int);
+      int price = jsonDecode(key).containsKey('price') ? (jsonDecode(key)['price'] as int) : 300;
       print(price);
       amt+=value*price;
         print(amt);
