@@ -29,9 +29,6 @@ class _HomeState extends State<Home> {
           height: 20,
         ),
         const BelowHome()
-
-
-
       ],
     );
   }

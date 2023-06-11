@@ -1,5 +1,6 @@
 import 'package:addies_shamiyana/src/features/authentication/controllers/login_logout_controller.dart';
 import 'package:addies_shamiyana/src/features/authentication/screens/loading/loading.dart';
+import 'package:addies_shamiyana/src/features/authentication/screens/login/login.dart';
 import 'package:addies_shamiyana/src/features/menu/screens/mainPage.dart';
 import 'package:addies_shamiyana/src/repository/authentication_repository/exceptions/login_email_passsword_failure.dart';
 import 'package:addies_shamiyana/src/shared_pref.dart';
@@ -111,8 +112,8 @@ class AuthenticationRepository extends GetxController{
   }
 
   Future<void> logout()async{
-    Get.deleteAll();
     await _auth.signOut();
+    Get.offAll(()=>Login());
   }
 
   Future<void> deleteUser(String passwd_delete)async{

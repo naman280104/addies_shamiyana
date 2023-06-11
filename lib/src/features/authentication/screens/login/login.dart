@@ -122,7 +122,7 @@ class _LoginState extends State<Login> {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>SignUp()));
+                                        Navigator.push(context,MaterialPageRoute(builder: (context)=>SignUp()));
                                         // Navigate to sign up screen
                                       },
                                       child: Text(NoaccountSignup,style: TextStyle(color: Theme.of(context).primaryColorDark),),

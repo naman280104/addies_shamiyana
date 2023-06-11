@@ -193,9 +193,10 @@ class _YourOrdersState extends State<YourOrders> {
     final _instance = FirebaseFirestore.instance;
     
     _instance.collection('Orders')
-        .where('orderedBy.email_uid', isEqualTo: user['email_uid'].toString())
+        .where('orderedEmail', isEqualTo: user['email'].toString())
         .get().then(
           (querySnapshot) {
+            // print(user['email']);
             List<Widget> orderCards = [];
             for(var docSnapshot in querySnapshot.docs) {
               // print(docSnapshot.data());

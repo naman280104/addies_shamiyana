@@ -56,25 +56,10 @@ class _SignUpState extends State<SignUp> {
                             children: [
                               const SizedBox(height: 20,),
                               SignupForm(),
-                              // Row(
-                              //   children: const [
-                              //     Expanded(child: Divider()),
-                              //     Padding(
-                              //       padding: EdgeInsets.symmetric(horizontal: 16),
-                              //       child: Text("or"),
-                              //     ),
-                              //     Expanded(child: Divider()),
-                              //   ],
-                              // ),
-                              // SignInButton(
-                              //   Buttons.Google,
-                              //   text: signupGoogle,
-                              //   onPressed: () {},
-                              // ),
+
                               TextButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Login()));
-
+                                  Navigator.of(context).pop();
                                   // -----------------------BYPASS FOR TESTING-------------------------
                                   // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>MainPage()));
                                   // Navigate to sign up screen
